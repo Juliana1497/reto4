@@ -35,13 +35,13 @@ public class ReservationController {
     }
 
     @GetMapping("/all")
-    public ReportStatusDbo reportStatus(){
-        return reservationService.reportStatus();
+    public List<ReservationModel> obtener(){
+        return reservationService.obtener();
     }
 
     @GetMapping("/report-status")
-    public List<ReservationModel> obtener(){
-        return reservationService.obtener();
+    public ReportStatusDbo reportstatus(){
+        return reservationService.reportStatus();
     }
 
     @GetMapping("/{id}")

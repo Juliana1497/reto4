@@ -37,8 +37,28 @@ public class ReservationService {
         reservationRepository.deleteById(id);
     }
 
-    public void actualizar(ReservationModel reservation){
-        if(reservationRepository.existsById(reservation.getIdReservation())){
+    public void actualizar(ReservationModel reservationInput){
+        Optional<ReservationModel> reservationDb = reservationRepository.findById(reservationInput.getIdReservation());
+        if(reservationDb.isPresent()){
+            ReservationModel reservation = reservationDb.get();
+            if (reservationInput.getStartDate() != null){
+                reservation.setStartDate(reservationInput.getStartDate());
+            }
+            if (reservationInput.getDevolutionDate() != null){
+                reservation.setDevolutionDate(reservationInput.getDevolutionDate());
+            }
+            if (reservationInput.getScore() != null){
+                reservation.setScore(reservationInput.getScore());
+            }
+            if (reservationInput.getStatus() != null){
+                reservation.setStatus(reservationInput.getStatus());
+            }
+            if (reservationInput.getCar() != null){
+                reservation.setCar(reservationInput.getCar());
+            }
+            if (reservationInput.getClient() != null){
+                reservation.setClient(reservationInput.getClient());
+            }
             reservationRepository.save(reservation);
         }
     }

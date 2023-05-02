@@ -36,7 +36,8 @@ public class ReservationModel {
     @JsonIgnoreProperties({"messages","reservations"})
     private ClientModel client;
 
-    @OneToOne(cascade = CascadeType.MERGE, mappedBy = "reservation")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_score",referencedColumnName = "id_score", unique = true)
     private ScoreModel score;
 }
 
