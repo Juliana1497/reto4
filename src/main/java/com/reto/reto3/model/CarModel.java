@@ -31,7 +31,7 @@ public class CarModel {
     private String description;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_gama", nullable = false)
+    @JoinColumn(name = "id_gama", nullable = true)
     @JsonIgnoreProperties("cars")
     private GamaModel gama;
 

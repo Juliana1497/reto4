@@ -14,6 +14,10 @@ public class CarService {
     @Autowired
     CarRepository carRepository;
 
+    public void guardar(CarModel car){
+        carRepository.save(car);
+    }
+
     public List<CarModel> obtener(){
         return carRepository.findAll();
     }
@@ -22,10 +26,6 @@ public class CarService {
     }
     public List<CarModel> obtenerPorMarcaYAño(String brand, int year) {
         return carRepository.findByBrandAndYear(brand, year);
-    }
-
-    public void guardar(CarModel car){
-        carRepository.save(car);
     }
 
     public void eliminar(int id){

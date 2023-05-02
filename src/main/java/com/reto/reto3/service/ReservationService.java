@@ -1,5 +1,6 @@
 package com.reto.reto3.service;
 
+import com.reto.reto3.dbo.ReportStatusDbo;
 import com.reto.reto3.model.AdminModel;
 import com.reto.reto3.model.CarModel;
 import com.reto.reto3.model.ReservationModel;
@@ -8,6 +9,9 @@ import com.reto.reto3.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,5 +45,19 @@ public class ReservationService {
 
     public Optional<ReservationModel> obtenerPorId(int id) {
         return reservationRepository.findById(id);
+    }
+
+    public ReportStatusDbo reportStatus() {
+        Integer countCompleted = reservationRepository.countByStatus("completed");
+        Integer countCancelled = reservationRepository.countByStatus("cancelled");
+        return new ReportStatusDbo(countCompleted, countCancelled);
+    }
+
+    public List<ReservationModel> reportDates(String fechaInicio, String fechaFinal) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyy-M-dd");
+        Date fechaInicioDate = format.parse(fechaInicio);
+        Date fechaFinalDate = format.parse(fechaFinal);
+        if(fechaInicioDate.before(fechaFinalDate)) return reservationRepository.findByStartDateBetween(fechaInicioDate,fechaFinalDate);
+        return null;
     }
 }

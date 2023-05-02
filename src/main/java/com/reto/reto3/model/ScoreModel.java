@@ -21,7 +21,7 @@ public class ScoreModel {
     private Float value;
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_reservation", unique = true, nullable = false)
+    @JoinColumn(name = "id_reservation", unique = true, nullable = true)
     private ReservationModel reservation;
 }
 

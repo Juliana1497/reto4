@@ -31,7 +31,9 @@ public class MessageService {
 
     public void actualizar(MessageModel message){
         if(messageRepository.existsById(message.getIdMessage())){
-            messageRepository.save(message);
+            MessageModel messageActual = messageRepository.findById(message.getIdMessage()).get();
+            messageActual.setMessageText(message.getMessageText());
+            messageRepository.save(messageActual);
         }
     }
 

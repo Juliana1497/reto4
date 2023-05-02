@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Gama")
+@CrossOrigin(value = "*")
 public class GamaController {
 
     @Autowired
